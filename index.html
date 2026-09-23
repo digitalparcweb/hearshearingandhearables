@@ -14,6 +14,7 @@
     --orange: #f16b24;
     --orange-dark: #d6591a;
     --bg-neutral: #f7f5f9;
+    --bg-card: #ffffff;
     --text-body: #3a3542;
     --text-muted: #6d6e71;
     --white: #ffffff;
@@ -21,11 +22,11 @@
     --radius: 10px;
     --radius-pill: 999px;
     --shadow: 0 4px 18px rgba(45, 25, 67, 0.08);
+    --shadow-lg: 0 12px 32px rgba(45, 25, 67, 0.14);
     --max-width: 1240px;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -43,14 +44,28 @@
   }
 
   a { color: inherit; text-decoration: none; }
-
   img { max-width: 100%; display: block; }
+  ul { list-style: none; }
 
   .wrap {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 24px;
   }
+
+  section { padding: 72px 0; }
+  section.tight { padding: 56px 0; }
+
+  .section-head {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 40px;
+  }
+  .section-head h2 {
+    font-size: clamp(26px, 3vw, 34px);
+    margin-bottom: 10px;
+  }
+  .section-head p { color: var(--text-muted); font-size: 15.5px; }
 
   .btn {
     display: inline-flex;
@@ -64,28 +79,49 @@
     border: 2px solid transparent;
     cursor: pointer;
     transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    white-space: nowrap;
   }
   .btn:hover { transform: translateY(-1px); }
 
-  .btn-primary {
-    background: var(--orange);
-    color: var(--white);
-  }
+  .btn-primary { background: var(--orange); color: var(--white); }
   .btn-primary:hover { background: var(--orange-dark); box-shadow: 0 6px 16px rgba(241,107,36,0.35); }
 
-  .btn-outline {
-    background: transparent;
-    border-color: var(--white);
-    color: var(--white);
-  }
+  .btn-outline { background: transparent; border-color: var(--white); color: var(--white); }
   .btn-outline:hover { background: rgba(255,255,255,0.12); }
 
-  .btn-outline-plum {
-    background: transparent;
-    border-color: var(--plum);
-    color: var(--plum);
-  }
+  .btn-outline-plum { background: transparent; border-color: var(--plum); color: var(--plum); }
   .btn-outline-plum:hover { background: var(--plum); color: var(--white); }
+
+  .btn-sm { padding: 9px 18px; font-size: 13.5px; }
+  .btn-block { width: 100%; }
+
+  /* ---------- Placeholder image blocks ---------- */
+  .ph {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, #f0eaf6 0%, #f7f2fa 100%);
+    border: 1.5px dashed #d6c8e6;
+    color: #8a76a3;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    padding: 10px;
+    overflow: hidden;
+  }
+  .ph span { max-width: 90%; }
+  .ph::before {
+    content: "IMG";
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    color: #b6a3cb;
+    letter-spacing: 0.08em;
+  }
 
   /* ---------- Announcement bar ---------- */
   .announce {
@@ -107,32 +143,31 @@
     background: var(--white);
     border-bottom: 1px solid var(--border);
   }
-
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    padding: 16px 24px;
+    padding: 14px 0;
   }
-
   .logo {
     display: flex;
     align-items: center;
     gap: 10px;
     font-family: 'Lora', serif;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 21px;
     color: var(--plum);
     letter-spacing: 0.01em;
     white-space: nowrap;
   }
-  .logo img { height: 36px; width: auto; }
-
-  nav.primary-nav {
-    display: flex;
-    gap: 32px;
+  .logo .ph {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    font-size: 8px;
   }
+  nav.primary-nav { display: flex; gap: 30px; }
   nav.primary-nav a {
     font-size: 15px;
     font-weight: 600;
@@ -153,11 +188,7 @@
   nav.primary-nav a:hover { color: var(--plum); }
   nav.primary-nav a:hover::after { transform: scaleX(1); }
 
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-  }
+  .header-actions { display: flex; align-items: center; gap: 16px; }
   .icon-btn {
     position: relative;
     display: inline-flex;
@@ -174,11 +205,9 @@
   }
   .icon-btn:hover { background: var(--bg-neutral); }
   .icon-btn svg { width: 20px; height: 20px; }
-
   .cart-badge {
     position: absolute;
-    top: 2px;
-    right: 2px;
+    top: 2px; right: 2px;
     background: var(--orange);
     color: var(--white);
     font-size: 10px;
@@ -192,21 +221,18 @@
     padding: 0 3px;
   }
 
-  .nav-toggle { display: none; }
-
   /* ---------- Hero ---------- */
   .hero {
     background: linear-gradient(135deg, var(--plum) 0%, var(--plum-dark) 100%);
     color: var(--white);
     overflow: hidden;
-    position: relative;
   }
   .hero-inner {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     align-items: center;
     gap: 48px;
-    padding: 88px 24px 96px;
+    padding: 88px 0 96px;
   }
   .hero-eyebrow {
     display: inline-flex;
@@ -221,64 +247,310 @@
     border-radius: var(--radius-pill);
     margin-bottom: 20px;
   }
-  .hero h1 {
-    color: var(--white);
-    font-size: clamp(32px, 4vw, 48px);
-    font-weight: 700;
-    margin-bottom: 20px;
-    max-width: 560px;
-  }
-  .hero p {
-    font-size: 17px;
+  .hero h1 { color: var(--white); font-size: clamp(32px, 4vw, 48px); font-weight: 700; margin-bottom: 20px; max-width: 560px; }
+  .hero p { font-size: 17px; color: #e4d9ef; max-width: 480px; margin-bottom: 32px; }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+  .hero-trustbar { display: flex; gap: 28px; flex-wrap: wrap; font-size: 13px; color: #cdbedd; }
+  .hero-trustbar span { display: flex; align-items: center; gap: 7px; }
+  .hero-trustbar svg { width: 16px; height: 16px; color: #ffb98a; flex-shrink: 0; }
+  .hero-visual .ph {
+    aspect-ratio: 4 / 3.2;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+    border: 1.5px dashed rgba(255,255,255,0.35);
     color: #e4d9ef;
-    max-width: 480px;
-    margin-bottom: 32px;
   }
-  .hero-ctas {
+  .hero-visual .ph::before { color: #cdbedd; }
+
+  /* ---------- Brand chargers grid ---------- */
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .brand-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
     display: flex;
+    flex-direction: column;
     gap: 14px;
-    flex-wrap: wrap;
-    margin-bottom: 36px;
+    position: relative;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
-  .hero-trustbar {
+  .brand-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .badge-popular {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: #fdeee3;
+    color: var(--orange-dark);
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+  }
+  .brand-card .ph { width: 56px; height: 56px; border-radius: 10px; font-size: 8px; }
+  .brand-card h3 { font-size: 17px; margin-bottom: 4px; }
+  .brand-card p { font-size: 13.5px; color: var(--text-muted); flex-grow: 1; }
+
+  .logo-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .logo-strip-item {
+    background: var(--bg-neutral);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+  }
+  .logo-strip-item .ph { height: 34px; margin: 0 auto; font-size: 8px; border-radius: 6px; }
+  .logo-strip-item p { font-size: 13px; font-weight: 600; color: var(--plum); margin-top: 4px; }
+
+  /* ---------- Product grid ---------- */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .product-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
     display: flex;
-    gap: 28px;
-    flex-wrap: wrap;
-    font-size: 13px;
-    color: #cdbedd;
+    flex-direction: column;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
-  .hero-trustbar span {
+  .product-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .product-card .ph { aspect-ratio: 1 / 1; font-size: 9px; }
+  .product-card .sale-tag {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: var(--orange);
+    color: var(--white);
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: var(--radius-pill);
+    z-index: 2;
+  }
+  .product-media { position: relative; }
+  .product-info { padding: 16px; display: flex; flex-direction: column; gap: 6px; flex-grow: 1; }
+  .product-info h4 { font-size: 14.5px; font-weight: 600; color: var(--text-body); min-height: 38px; }
+  .price-row { display: flex; align-items: baseline; gap: 8px; }
+  .price-row .price { font-weight: 700; color: var(--plum); font-size: 16px; }
+  .price-row .price-starting { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+  .member-price { font-size: 12px; color: var(--orange-dark); font-weight: 600; }
+  .product-info .btn { margin-top: auto; }
+
+  .view-all-wrap { text-align: center; margin-top: 32px; }
+
+  /* ---------- Accessory categories ---------- */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .cat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 16px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
-  .hero-trustbar svg { width: 16px; height: 16px; color: #ffb98a; flex-shrink: 0; }
+  .cat-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .cat-card .ph { width: 60px; height: 60px; border-radius: 10px; flex-shrink: 0; font-size: 8px; }
+  .cat-card h3 { font-size: 16px; margin-bottom: 3px; }
+  .cat-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
+  .cat-card a { font-size: 13px; font-weight: 700; color: var(--orange-dark); }
 
-  .hero-visual {
-    position: relative;
+  /* ---------- Why Work With Us ---------- */
+  .why-section { background: var(--bg-neutral); }
+  .why-inner {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 56px;
+    align-items: start;
   }
-  .hero-visual img {
+  .why-inner .ph { aspect-ratio: 3.5 / 4; border-radius: var(--radius); font-size: 9px; position: sticky; top: 100px; }
+  .why-copy h2 { font-size: clamp(26px, 3vw, 32px); margin-bottom: 18px; }
+  .why-copy p { color: var(--text-body); font-size: 15px; margin-bottom: 16px; line-height: 1.65; }
+  .why-copy p:last-child { margin-bottom: 0; }
+
+  /* ---------- What makes us different ---------- */
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .diff-card {
+    padding: 26px;
     border-radius: var(--radius);
-    width: 100%;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
   }
-  @media (max-width: 900px) {
+  .diff-card .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: #fdeee3;
+    color: var(--orange-dark);
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .diff-card h3 { font-size: 16px; margin-bottom: 8px; }
+  .diff-card p { font-size: 13.8px; color: var(--text-muted); line-height: 1.55; }
+
+  /* ---------- Membership ---------- */
+  .membership-band {
+    background: var(--plum);
+    border-radius: 20px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 40px;
+    align-items: center;
+    color: var(--white);
+  }
+  .membership-band h2 { color: var(--white); font-size: clamp(24px, 3vw, 30px); margin-bottom: 6px; }
+  .membership-band .eyebrow { color: #ffb98a; font-weight: 700; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+  .membership-band > div > p { color: #e4d9ef; font-size: 15px; margin-bottom: 18px; max-width: 460px; }
+  .membership-list { display: grid; gap: 10px; margin-bottom: 0; }
+  .membership-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #f0e9f7; }
+  .membership-list svg { width: 17px; height: 17px; color: #ffb98a; flex-shrink: 0; margin-top: 2px; }
+  .membership-card {
+    background: var(--white);
+    color: var(--text-body);
+    border-radius: var(--radius);
+    padding: 28px;
+    text-align: center;
+  }
+  .membership-card h3 { font-size: 15px; color: var(--text-muted); font-weight: 600; margin-bottom: 6px; }
+  .membership-card .amount { font-family: 'Lora', serif; font-size: 40px; color: var(--plum); font-weight: 700; }
+  .membership-card .amount span { font-size: 14px; color: var(--text-muted); font-weight: 500; font-family: 'Inter', sans-serif; }
+  .membership-card ul { margin: 18px 0 22px; display: grid; gap: 8px; text-align: left; }
+  .membership-card ul li { font-size: 13px; color: var(--text-body); display: flex; gap: 8px; align-items: flex-start; }
+  .membership-card ul svg { width: 15px; height: 15px; color: var(--orange); flex-shrink: 0; margin-top: 2px; }
+
+  /* ---------- Ready for better hearing CTA ---------- */
+  .cta-band { padding: 0; }
+  .cta-inner {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: center;
+    gap: 48px;
+  }
+  .cta-inner .ph { aspect-ratio: 4 / 3.4; border-radius: var(--radius); font-size: 9px; }
+  .cta-copy h2 { font-size: clamp(24px, 3vw, 30px); margin-bottom: 14px; }
+  .cta-copy p { color: var(--text-muted); font-size: 15px; margin-bottom: 8px; }
+  .cta-copy .fine { font-size: 13px; color: var(--text-muted); margin: 12px 0 24px; }
+  .cta-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* ---------- Trust bar ---------- */
+  .trust-bar {
+    background: var(--bg-neutral);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .trust-item { display: flex; align-items: center; gap: 14px; }
+  .trust-item .ph { width: 46px; height: 46px; border-radius: 10px; flex-shrink: 0; font-size: 7px; }
+  .trust-item h4 { font-size: 14.5px; color: var(--plum); margin-bottom: 2px; }
+  .trust-item p { font-size: 12.5px; color: var(--text-muted); }
+
+  /* ---------- Footer ---------- */
+  footer { background: var(--plum-dark); color: #cdbedd; padding-top: 64px; }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(4, 1fr);
+    gap: 32px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .footer-brand .logo { color: var(--white); margin-bottom: 14px; }
+  .footer-brand .ph { border-color: rgba(255,255,255,0.3); background: rgba(255,255,255,0.08); color: #cdbedd; }
+  .footer-brand p { font-size: 13.5px; color: #b6a3cb; max-width: 260px; margin-bottom: 18px; }
+  .social-row { display: flex; gap: 10px; }
+  .social-row a {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .social-row svg { width: 16px; height: 16px; }
+  footer h4 { color: var(--white); font-size: 13.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 16px; }
+  footer ul { display: grid; gap: 10px; }
+  footer ul a { font-size: 13.8px; color: #cdbedd; }
+  footer ul a:hover { color: var(--white); }
+  .newsletter-form { display: flex; gap: 0; margin-top: 6px; }
+  .newsletter-form input {
+    flex-grow: 1;
+    padding: 11px 14px;
+    border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+    border: none;
+    font-size: 13.5px;
+    font-family: inherit;
+  }
+  .newsletter-form button {
+    padding: 11px 18px;
+    border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+    border: none;
+    background: var(--orange);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 13.5px;
+    cursor: pointer;
+  }
+  .newsletter-fine { font-size: 11.5px; color: #8a76a3; margin-top: 8px; }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 24px 0 32px;
+    font-size: 12.5px;
+    color: #8a76a3;
+  }
+  .footer-badges { display: flex; gap: 18px; flex-wrap: wrap; }
+
+  @media (max-width: 980px) {
     nav.primary-nav { display: none; }
-    .hero-inner { grid-template-columns: 1fr; padding: 56px 24px 64px; }
+    .hero-inner { grid-template-columns: 1fr; padding: 56px 0 64px; }
     .hero-visual { order: -1; }
+    .brand-grid, .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .logo-strip { grid-template-columns: repeat(2, 1fr); }
+    .cat-grid { grid-template-columns: 1fr; }
+    .why-inner, .cta-inner { grid-template-columns: 1fr; }
+    .why-inner .ph { position: static; }
+    .diff-grid { grid-template-columns: 1fr; }
+    .membership-band { grid-template-columns: 1fr; padding: 32px; }
+    .trust-bar { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
 <body>
 
   <div class="announce">
-    <strong>10% Off</strong> Hearing Aid Accessories — Use code <strong>APRIL10</strong>
+    <strong>10% Off</strong> Hearing Aid Accessories. Use code <strong>APRIL10</strong>
   </div>
 
   <header>
-    <div class="header-inner wrap" style="padding-left:0; padding-right:0;">
+    <div class="header-inner wrap">
       <a href="#" class="logo">
-        <img src="hhh-logo.webp" alt="Hears Hearing & Hearables logo">
+        <span class="ph"><span>LOGO</span></span>
+        HEARS
       </a>
 
       <nav class="primary-nav">
@@ -305,12 +577,12 @@
     </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-inner wrap" style="padding-left:0; padding-right:0;">
+  <section class="hero" style="padding:0;">
+    <div class="hero-inner wrap">
       <div>
         <span class="hero-eyebrow">Trusted by 10,000+ Customers</span>
         <h1>Prescription Hearing Aids &amp; Hearing Care, Backed by a Real Audiology Clinic</h1>
-        <p>Shop genuine Signia, Oticon, Phonak, ReSound and Starkey hearing aids and accessories &mdash; with fast U.S. shipping and licensed support.</p>
+        <p>Shop genuine Signia, Oticon, Phonak, ReSound &amp; more. Fast U.S. shipping and licensed support.</p>
         <div class="hero-ctas">
           <a href="#accessories" class="btn btn-primary">Shop Chargers</a>
           <a href="#accessories" class="btn btn-outline">Shop Accessories</a>
@@ -322,20 +594,400 @@
         </div>
       </div>
       <div class="hero-visual">
-        <img src="https://hearshearingandhearables.com/wp-content/uploads/2026/02/hearing-aids-and-chargers-and-streamers.webp" alt="Hearing aids, chargers, and streamers product lineup">
+        <div class="ph"><span>Hero product photo. Hearing aids, chargers &amp; streamers lineup</span></div>
       </div>
     </div>
   </section>
 
-  <!-- Remaining homepage sections build next, after review of header + hero. -->
+  <section id="hearing-aids">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Shop Chargers By Brand</h2>
+        <p>Find the right charger for your hearing aid model.</p>
+      </div>
+      <div class="brand-grid">
+        <div class="brand-card">
+          <span class="badge-popular">Most Popular</span>
+          <div class="ph"><span>Widex logo</span></div>
+          <div>
+            <h3>Widex Chargers</h3>
+            <p>Reliable charging solutions for Widex devices.</p>
+          </div>
+          <a href="#" class="btn btn-outline-plum btn-sm">Shop Widex Chargers</a>
+        </div>
+        <div class="brand-card">
+          <span class="badge-popular">Most Popular</span>
+          <div class="ph"><span>Signia logo</span></div>
+          <div>
+            <h3>Signia Chargers</h3>
+            <p>Genuine replacement and travel chargers.</p>
+          </div>
+          <a href="#" class="btn btn-outline-plum btn-sm">Shop Signia Chargers</a>
+        </div>
+        <div class="brand-card">
+          <div class="ph"><span>Phonak logo</span></div>
+          <div>
+            <h3>Phonak Chargers</h3>
+            <p>Find the right charger for your Phonak hearing aids.</p>
+          </div>
+          <a href="#" class="btn btn-outline-plum btn-sm">Shop Phonak Chargers</a>
+        </div>
+        <div class="brand-card">
+          <div class="ph"><span>Starkey logo</span></div>
+          <div>
+            <h3>Starkey Chargers</h3>
+            <p>Genuine replacement and travel chargers.</p>
+          </div>
+          <a href="#" class="btn btn-outline-plum btn-sm">Shop Starkey Chargers</a>
+        </div>
+      </div>
+      <div class="logo-strip">
+        <div class="logo-strip-item"><div class="ph"><span>Rexton logo</span></div><p>Rexton</p></div>
+        <div class="logo-strip-item"><div class="ph"><span>Oticon logo</span></div><p>Oticon</p></div>
+        <div class="logo-strip-item"><div class="ph"><span>ReSound logo</span></div><p>ReSound</p></div>
+        <div class="logo-strip-item"><div class="ph"><span>Unitron logo</span></div><p>Unitron</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight" style="background:var(--bg-neutral);">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Best Selling Chargers</h2>
+        <p>Our most purchased and trusted charger models. Fast U.S. shipping, genuine products, licensed support.</p>
+      </div>
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-media"><div class="ph"><span>Widex Moment Standard Charger</span></div></div>
+          <div class="product-info">
+            <h4>Widex Moment Standard Charger</h4>
+            <div class="price-row"><span class="price">$129.00</span></div>
+            <span class="member-price">Members pay: $120.00</span>
+            <a href="#" class="btn btn-primary btn-sm btn-block">Add to cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><div class="ph"><span>Signia Pure Portable Charger</span></div></div>
+          <div class="product-info">
+            <h4>Signia Pure Portable Charger</h4>
+            <div class="price-row"><span class="price">$245.00</span></div>
+            <span class="member-price">Members pay: $225.00</span>
+            <a href="#" class="btn btn-primary btn-sm btn-block">Add to cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><div class="ph"><span>Signia Pure Standard Charger</span></div></div>
+          <div class="product-info">
+            <h4>Signia Pure Standard Charger</h4>
+            <div class="price-row"><span class="price">$185.00</span></div>
+            <span class="member-price">Members pay: $170.00</span>
+            <a href="#" class="btn btn-primary btn-sm btn-block">Add to cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><div class="ph"><span>Widex Moment Charge N Clean Charger</span></div></div>
+          <div class="product-info">
+            <h4>Widex Moment Charge N Clean Charger</h4>
+            <div class="price-row"><span class="price">$230.00</span></div>
+            <span class="member-price">Members pay: $200.00</span>
+            <a href="#" class="btn btn-primary btn-sm btn-block">Add to cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><div class="ph"><span>Starkey StarLink 2.0 Charger</span></div></div>
+          <div class="product-info">
+            <h4>Starkey StarLink 2.0 Charger</h4>
+            <div class="price-row"><span class="price-starting">Starting at $150.00</span></div>
+            <a href="#" class="btn btn-primary btn-sm btn-block">View options</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><span class="sale-tag">Sale</span><div class="ph"><span>Phonak Charger Case Go</span></div></div>
+          <div class="product-info">
+            <h4>Phonak Charger Case Go</h4>
+            <div class="price-row">&nbsp;</div>
+            <a href="#" class="btn btn-primary btn-sm btn-block">Add to cart</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><span class="sale-tag">Sale</span><div class="ph"><span>Starkey Charger for Thrive Products</span></div></div>
+          <div class="product-info">
+            <h4>Starkey Charger for Thrive Products</h4>
+            <div class="price-row"><span class="price-starting">Starting at $150.00</span></div>
+            <a href="#" class="btn btn-primary btn-sm btn-block">View options</a>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><div class="ph"><span>Phonak Charger Case Combi RIC 2</span></div></div>
+          <div class="product-info">
+            <h4>Phonak Charger Case Combi RIC 2</h4>
+            <div class="price-row">&nbsp;</div>
+            <a href="#" class="btn btn-primary btn-sm btn-block">View options</a>
+          </div>
+        </div>
+      </div>
+      <div class="view-all-wrap">
+        <a href="#" class="btn btn-outline-plum">View All Chargers</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="accessories">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Hearing Aid Accessories</h2>
+        <p>Everything you need to maintain, connect, and protect your devices.</p>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card">
+          <div class="ph"><span>TV Streamers</span></div>
+          <div>
+            <h3>TV Streamers</h3>
+            <p>Stream TV audio directly to your hearing aids.</p>
+            <a href="#">Shop Streamers &rarr;</a>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="ph"><span>Remote Controls</span></div>
+          <div>
+            <h3>Remote Controls</h3>
+            <p>These make life so much easier for you.</p>
+            <a href="#">Shop Remotes &rarr;</a>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="ph"><span>Cleaning &amp; Care</span></div>
+          <div>
+            <h3>Cleaning &amp; Care</h3>
+            <p>Keep your devices performing like new.</p>
+            <a href="#">Shop Cleaning &rarr;</a>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="ph"><span>Receivers</span></div>
+          <div>
+            <h3>Receivers</h3>
+            <p>Replacement parts for optimal sound quality.</p>
+            <a href="#">Shop Parts &rarr;</a>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="ph"><span>Microphone &amp; Streamers</span></div>
+          <div>
+            <h3>Microphone &amp; Streamers</h3>
+            <p>Boost your hearing in noisy environments.</p>
+            <a href="#">Shop Mics &rarr;</a>
+          </div>
+        </div>
+        <div class="cat-card">
+          <div class="ph"><span>Listening Systems</span></div>
+          <div>
+            <h3>Listening Systems</h3>
+            <p>Solutions for classrooms, offices, and group settings.</p>
+            <a href="#">Shop Systems &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="why-section">
+    <div class="wrap why-inner">
+      <div class="ph"><span>Clinic or team photo</span></div>
+      <div class="why-copy">
+        <h2>Why Work With Hears Hearing &amp; Hearables</h2>
+        <p>Most online hearing aid stores are retail operations without clinical staff. Most audiology clinics do not operate online stores. We do both because we think the combination produces a better experience than either one alone.</p>
+        <p>Our clinic, Hears to U in Hopkins, Minnesota, has been fitting and caring for patients for more than 30 years. Kim Fishman is the audiologist behind both the clinic and this store. She and other networked providers fit hearing aids in person or via telehealth for patients across the country.</p>
+        <p>Our store is membership based, so if you join, you can save money and earn rewards. Membership is very affordable for one year.</p>
+        <p>We are independent, not owned by a manufacturer, and pride ourselves on doing what is best for you. We have been offering demos of hearing aids in our Minnesota clinic since 2012. We are now offering the ability to demo one to three hearing aids remotely.</p>
+        <p>We carry prescription hearing aids from eight independent manufacturers, not a single franchise brand, not a big box store's house brand, and not private label devices that can only be serviced by one retail chain. Every brand we carry can be programmed by any hearing provider with the right software, which matters when you travel, when you move, or when you simply want options for your long term care.</p>
+        <p>We publish our prices. For the two brands that prohibit online price display, Oticon and Phonak, we explain why and invite you to contact us directly. Transparent pricing is not just a policy here. It is the reason we built the store the way we did.</p>
+        <p>Best of all, when you contact us with a question, you are reaching a clinical team, not a customer service script. We do not offer our phone number readily. We want to save personal information for our patients. If you want to become a patient of ours, we will give you our phone number. Emails are free. Service does cost a small amount.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What Makes Us Different</h2>
+      </div>
+      <div class="diff-grid">
+        <div class="diff-card">
+          <span class="num">1</span>
+          <h3>Clinic backed expertise</h3>
+          <p>Every product we carry is evaluated and recommended by a licensed audiologist with decades of clinical experience, not sourced by a purchasing department.</p>
+        </div>
+        <div class="diff-card">
+          <span class="num">2</span>
+          <h3>Transparent, unbundled pricing</h3>
+          <p>We separate the cost of the device from the cost of the service so you know exactly what you are paying for each.</p>
+        </div>
+        <div class="diff-card">
+          <span class="num">3</span>
+          <h3>Top prescription brands</h3>
+          <p>Starkey, Signia, Widex, Oticon, Phonak, ReSound, Unitron, and Rexton. The full range of independent manufacturer platforms, not a curated shortlist.</p>
+        </div>
+        <div class="diff-card">
+          <span class="num">4</span>
+          <h3>Consignment hearing aids</h3>
+          <p>Professionally verified, tested, UV-C sterilized, and electroacoustically analyzed used devices for patients who need prescription quality at a lower cost.</p>
+        </div>
+        <div class="diff-card">
+          <span class="num">5</span>
+          <h3>Telehealth nationwide</h3>
+          <p>Remote programming and follow up for most major brands, so patients anywhere in the country can access clinical quality care without a clinic visit.</p>
+        </div>
+        <div class="diff-card">
+          <span class="num">6</span>
+          <h3>State law 30 to 60 day return window</h3>
+          <p>Most state laws provide at least a 30 day trial period for prescription and OTC hearing aids purchased, including online purchases through our store.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="membership" class="tight">
+    <div class="wrap">
+      <div class="membership-band">
+        <div>
+          <div class="eyebrow">Join HEARS</div>
+          <h2>Membership &amp; Save All Year</h2>
+          <p>Unlock exclusive pricing, rewards, and added benefits for just $25 annually.</p>
+          <ul class="membership-list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Save instantly on many products</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Special member only pricing</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Earn points and rewards</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>5% off hearing aid services</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Sell products in our consignment marketplace</li>
+          </ul>
+        </div>
+        <div class="membership-card">
+          <h3>HEARS Membership</h3>
+          <div class="amount">$25<span>/year</span></div>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Save on products</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Earn rewards</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Exclusive access</li>
+          </ul>
+          <a href="#" class="btn btn-primary btn-block">Become a Member</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap cta-inner">
+      <div class="ph"><span>Woman putting on a hearing aid photo</span></div>
+      <div class="cta-copy">
+        <h2>Ready For Better Hearing?</h2>
+        <p>Explore modern rechargeable hearing aids with expert guidance and remote support.</p>
+        <p class="fine">Licensed support. Genuine manufacturer products.</p>
+        <div class="cta-actions">
+          <a href="#hearing-aids" class="btn btn-primary">Explore Hearing Aids</a>
+          <a href="#" class="btn btn-outline-plum">Schedule a Consultation</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-bar tight">
+    <div class="wrap trust-bar">
+      <div class="trust-item"><div class="ph"><span>Icon</span></div><div><h4>Licensed Support</h4><p>Expert help available</p></div></div>
+      <div class="trust-item"><div class="ph"><span>Icon</span></div><div><h4>Genuine Products</h4><p>Direct from manufacturers</p></div></div>
+      <div class="trust-item"><div class="ph"><span>Icon</span></div><div><h4>Fast U.S. Shipping</h4><p>Fast priority shipping</p></div></div>
+      <div class="trust-item"><div class="ph"><span>Icon</span></div><div><h4>Secure Checkout</h4><p>Safe and encrypted payments</p></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="logo"><span class="ph"><span>Logo, white</span></span>HEARS</a>
+          <p>Your trusted source for hearing aids, chargers, and accessories.</p>
+          <div class="social-row">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-9h3l1-4h-4V6.5C13 5.5 13.5 5 14.8 5H17V1.2C16.5 1.1 15 1 13.5 1 10.3 1 8 3 8 6.6V9H5v4h3v9h5z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><polygon points="10 9 15 12 10 15" fill="currentColor"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2 3.77-2 4 0 4.7 2.6 4.7 6V21H17v-5.3c0-1.3 0-3-1.85-3s-2.15 1.4-2.15 2.9V21H9z"/></svg></a>
+            <a href="#" aria-label="Reddit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="#">Shop Chargers</a></li>
+            <li><a href="#">Shop Accessories</a></li>
+            <li><a href="#">Hearing Aids</a></li>
+            <li><a href="#">Membership</a></li>
+            <li><a href="#">Consignment Marketplace</a></li>
+            <li><a href="#">Best Sellers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Order Tracking</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Schedule Consultation</a></li>
+            <li><a href="#">Help Finding My Charger</a></li>
+            <li><a href="#">Returns, Refunds &amp; Exchanges</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">FAQs</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">About HEARS</a></li>
+            <li><a href="#">About Our Providers</a></li>
+            <li><a href="#">Licensed Support Team</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Reviews</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Stay Connected</h4>
+          <p style="font-size:13.5px; color:#b6a3cb; margin-bottom:12px;">Get member deals and updates. Exclusive discounts, hearing tips, and product alerts.</p>
+          <form class="newsletter-form" onsubmit="return false;">
+            <input type="email" placeholder="Email" aria-label="Email">
+            <button type="submit">Get Deals</button>
+          </form>
+          <p class="newsletter-fine">No spam. Unsubscribe anytime.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Hears Hearing &amp; Hearables. All worldwide rights reserved.</span>
+        <div class="footer-badges">
+          <span>Fast Shipping</span>
+          <span>Easy Returns</span>
+          <span>Secure Checkout</span>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script>
-    // Mock cart state — visual only, no real commerce backend.
+    // Mock cart state, visual only, no real commerce backend.
     let cartCount = 0;
     const cartCountEl = document.getElementById('cartCount');
     const cartBtn = document.getElementById('cartBtn');
+
+    document.querySelectorAll('.product-info .btn, .btn-primary[href="#"]').forEach(btn => {
+      if (btn.textContent.trim() === 'Add to cart') {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          cartCount++;
+          cartCountEl.textContent = cartCount;
+        });
+      }
+    });
+
     cartBtn.addEventListener('click', () => {
-      alert('Cart drawer placeholder — will show items once product sections are built.');
+      alert('Cart drawer placeholder. Items in cart: ' + cartCount);
     });
   </script>
 
