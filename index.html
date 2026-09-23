@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hears Hearing &amp; Hearables | Audiologist Hearing Aid Store</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #2d1943;
+    --plum-dark: #231138;
+    --orange: #f16b24;
+    --orange-dark: #d6591a;
+    --bg-neutral: #f7f5f9;
+    --text-body: #3a3542;
+    --text-muted: #6d6e71;
+    --white: #ffffff;
+    --border: #e7e3ec;
+    --radius: 10px;
+    --radius-pill: 999px;
+    --shadow: 0 4px 18px rgba(45, 25, 67, 0.08);
+    --max-width: 1240px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-body);
+    background: var(--white);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Lora', serif;
+    color: var(--plum);
+    line-height: 1.2;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  img { max-width: 100%; display: block; }
+
+  .wrap {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 28px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 15px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+
+  .btn-primary {
+    background: var(--orange);
+    color: var(--white);
+  }
+  .btn-primary:hover { background: var(--orange-dark); box-shadow: 0 6px 16px rgba(241,107,36,0.35); }
+
+  .btn-outline {
+    background: transparent;
+    border-color: var(--white);
+    color: var(--white);
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.12); }
+
+  .btn-outline-plum {
+    background: transparent;
+    border-color: var(--plum);
+    color: var(--plum);
+  }
+  .btn-outline-plum:hover { background: var(--plum); color: var(--white); }
+
+  /* ---------- Announcement bar ---------- */
+  .announce {
+    background: var(--plum-dark);
+    color: var(--white);
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 8px 16px;
+  }
+  .announce strong { color: #ffb98a; }
+
+  /* ---------- Header ---------- */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 16px 24px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Lora', serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--plum);
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  .logo img { height: 36px; width: auto; }
+
+  nav.primary-nav {
+    display: flex;
+    gap: 32px;
+  }
+  nav.primary-nav a {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-body);
+    position: relative;
+    padding: 6px 0;
+  }
+  nav.primary-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  nav.primary-nav a:hover { color: var(--plum); }
+  nav.primary-nav a:hover::after { transform: scaleX(1); }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .icon-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: var(--plum);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transition: background 0.15s ease;
+  }
+  .icon-btn:hover { background: var(--bg-neutral); }
+  .icon-btn svg { width: 20px; height: 20px; }
+
+  .cart-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: var(--orange);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
+  }
+
+  .nav-toggle { display: none; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: linear-gradient(135deg, var(--plum) 0%, var(--plum-dark) 100%);
+    color: var(--white);
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 48px;
+    padding: 88px 24px 96px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #ffd9bd;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    color: var(--white);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 700;
+    margin-bottom: 20px;
+    max-width: 560px;
+  }
+  .hero p {
+    font-size: 17px;
+    color: #e4d9ef;
+    max-width: 480px;
+    margin-bottom: 32px;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .hero-trustbar {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #cdbedd;
+  }
+  .hero-trustbar span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .hero-trustbar svg { width: 16px; height: 16px; color: #ffb98a; flex-shrink: 0; }
+
+  .hero-visual {
+    position: relative;
+  }
+  .hero-visual img {
+    border-radius: var(--radius);
+    width: 100%;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  }
+  @media (max-width: 900px) {
+    nav.primary-nav { display: none; }
+    .hero-inner { grid-template-columns: 1fr; padding: 56px 24px 64px; }
+    .hero-visual { order: -1; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="announce">
+    <strong>10% Off</strong> Hearing Aid Accessories — Use code <strong>APRIL10</strong>
+  </div>
+
+  <header>
+    <div class="header-inner wrap" style="padding-left:0; padding-right:0;">
+      <a href="#" class="logo">
+        <img src="hhh-logo.webp" alt="Hears Hearing & Hearables logo">
+      </a>
+
+      <nav class="primary-nav">
+        <a href="#services">Services</a>
+        <a href="#hearing-aids">Hearing Aids</a>
+        <a href="#accessories">Accessories</a>
+        <a href="#repairs">Repairs</a>
+        <a href="#membership">Membership</a>
+        <a href="#blog">Blog</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+        </button>
+        <button class="icon-btn" id="cartBtn" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+          <span class="cart-badge" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner wrap" style="padding-left:0; padding-right:0;">
+      <div>
+        <span class="hero-eyebrow">Trusted by 10,000+ Customers</span>
+        <h1>Prescription Hearing Aids &amp; Hearing Care, Backed by a Real Audiology Clinic</h1>
+        <p>Shop genuine Signia, Oticon, Phonak, ReSound and Starkey hearing aids and accessories &mdash; with fast U.S. shipping and licensed support.</p>
+        <div class="hero-ctas">
+          <a href="#accessories" class="btn btn-primary">Shop Chargers</a>
+          <a href="#accessories" class="btn btn-outline">Shop Accessories</a>
+        </div>
+        <div class="hero-trustbar">
+          <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>Fast U.S. Shipping</span>
+          <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>Genuine Products</span>
+          <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/></svg>Licensed Support</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://hearshearingandhearables.com/wp-content/uploads/2026/02/hearing-aids-and-chargers-and-streamers.webp" alt="Hearing aids, chargers, and streamers product lineup">
+      </div>
+    </div>
+  </section>
+
+  <!-- Remaining homepage sections build next, after review of header + hero. -->
+
+  <script>
+    // Mock cart state — visual only, no real commerce backend.
+    let cartCount = 0;
+    const cartCountEl = document.getElementById('cartCount');
+    const cartBtn = document.getElementById('cartBtn');
+    cartBtn.addEventListener('click', () => {
+      alert('Cart drawer placeholder — will show items once product sections are built.');
+    });
+  </script>
+
+</body>
+</html>
