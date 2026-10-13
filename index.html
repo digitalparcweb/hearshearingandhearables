@@ -832,6 +832,18 @@ a.btn.is-added { background: #0f9d6b !important; border-color: #0f9d6b !importan
 .ticker-item::after { content:''; position:absolute; right:-4px; top:50%; width:8px; height:8px; margin-top:-4px; border-radius:50%; background:var(--brass); }
 @keyframes tickerLoop { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .ticker-track { animation:none; } }
+
+/* ---- unified section header: title, then supporting copy, then 40px to content ---- */
+.brands-head, .section-label { display:block; margin:0 0 40px; }
+.brands-head h2, .section-label h2 { font-size: clamp(26px, 3.2vw, 34px); margin:0 0 10px; }
+.brands-head p, .section-label p { font-size:15.5px; color:var(--muted); max-width:none; margin:0; line-height:1.55; }
+.section-label[style*="text-align:center"] p { margin:0 auto; }
+#view-home section.tight { padding: 72px 0; }
+/* carousel arrows sit on the cards so every section shares the same left edge */
+.acc-carousel:not(.testimonial-carousel) .acc-arrow { position:absolute; top:131px; transform:translateY(-50%); z-index:2; box-shadow:0 6px 18px rgba(45,25,67,0.18); }
+.acc-carousel:not(.testimonial-carousel) .acc-arrow-prev { left:10px; }
+.acc-carousel:not(.testimonial-carousel) .acc-arrow-next { right:10px; }
+.acc-carousel:not(.testimonial-carousel) .acc-list { width:100%; }
 /* brand gradient (client feedback) */
 .bento-copy, .announce, .about-hero, .mem-hero, .combo-band { background: var(--grad-purple); }
 .btn-primary, .btn-brass { background-image: var(--grad-orange); }
@@ -1313,8 +1325,7 @@ a.btn.is-added { background: #0f9d6b !important; border-color: #0f9d6b !importan
 
   <section class="hairline-top" style="background:var(--ivory);">
     <div class="wrap">
-      <div class="section-label" style="margin-top:0; display:block; text-align:center;">
-        <p style="color:var(--brass-deep); font-weight:600; margin-bottom:6px;">Testimonials</p>
+      <div class="section-label" style="margin-top:0;">
         <h2>What Our Clients Say</h2>
       </div>
       <div class="acc-carousel testimonial-carousel">
